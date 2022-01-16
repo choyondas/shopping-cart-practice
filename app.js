@@ -6,6 +6,8 @@ function updateProduct(product, price, isIncrease) {
   const case_price = document.getElementById(product + "-price");
   let case_total = case_price.innerText;
 
+  //update Subtotal
+
   if (isIncrease) {
     input_case.value = parseInt(case_value) + 1;
     case_price.innerText = price * input_case.value;
@@ -13,6 +15,21 @@ function updateProduct(product, price, isIncrease) {
     input_case.value = parseInt(case_value) - 1;
     case_price.innerText = price * input_case.value;
   }
+  updateTotal();
+}
+
+function updateTotal() {
+  const phone_price = document.getElementById("phone-price").innerText;
+  const case_price = document.getElementById("case-price").innerText;
+  const subtotal_price = parseInt(phone_price) + parseInt(case_price);
+  const subtotal = document.getElementById("subtotal");
+  subtotal.innerText= subtotal_price;
+  const tax = document.getElementById("tax");
+  tax.innerText = parseInt(subtotal_price) /10;
+
+  const total = document.getElementById("total");
+  total.innerText = parseFloat( subtotal.innerText) + parseFloat( tax.innerText);
+  
 }
 
 document.getElementById("case-plus").addEventListener("click", function () {
